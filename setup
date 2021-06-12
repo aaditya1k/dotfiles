@@ -1,0 +1,54 @@
+echo "Make sure brew is installed."
+echo "Do you want to continue this setup? (y/n) "
+old_stty_cfg=$(stty -g)
+stty raw -echo
+answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
+stty $old_stty_cfg
+if echo "$answer" | grep -iq "^y" ;then
+	echo "Starting Setup"
+else
+	echo "Exiting Setup. Bye.."
+    exit 0
+fi
+
+
+if [ -z "${SHELL##*zsh*}" ] ;then
+    echo "Default shell is zsh"
+else
+    echo "Default shell is not zsh"
+    echo "Exiting Setup. Bye.."
+    exit 0
+fi
+
+
+echo "\nChecking git submodules"
+git submodule update --init --recursive
+
+
+echo "\nBacking up old configurations"
+echo "Ignoring i3.conf"
+configs=(".zshrc" ".tmux.conf" ".vimrc")
+for config in "${configs[@]}" ;do
+    echo "Renaming old config $HOME/$config -> $config.old"
+    mv "$HOME/$config" "$HOME/$config.old"
+done
+
+
+echo "\nSetting up configs"
+echo "SET BATTERY_LOG_PATH manually in ${HOME}/.zshrc"
+
+printf "\nBATTERY_LOG_PATH=\"\"\n\n" > ~/.zshrc
+printf "source '$HOME/dotfiles/zshrc.sh'" >> ~/.zshrc
+
+printf "so $HOME/dotfiles/vimrc.vim" > ~/.vimrc
+printf "source-file $HOME/dotfiles/tmux.conf" > ~/.tmux.conf
+
+
+echo "\nInstalling brew packages"
+brew_packages=("bat" "tmux")
+for brew_package in "${brew_packages[@]}" ;do
+    echo "> brew installing $brew_package"
+    brew install $brew_package
+done
+
+echo "\nSetup Finished. Have Fun.."
