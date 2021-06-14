@@ -4,7 +4,7 @@ filetype off            " disable filetype detection (but re-enable later, see b
 
 """" Basic Behavior
 set number              " show line numbers
-set relativenumber 
+set relativenumber
 " set wrap                " wrap lines
 set encoding=utf-8      " set encoding to UTF-8 (default was "latin1")
 set mouse=a             " enable mouse support (might not work well on Mac OS X)
@@ -40,7 +40,7 @@ nnoremap <C-n> :set relativenumber<CR>:set number<CR>:echo "Line numbers turned 
 
 """" Miscellaneous settings that might be worth enabling
 
-set cursorline         " highlight current line
+"set cursorline         " highlight current line
 "set autoread           " autoreload the file in Vim if it has been changed outside of Vim
 
 
