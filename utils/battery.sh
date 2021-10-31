@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Instructions for adding this in cronjob
-# 0 */6 * * * ~/dotfiles/utils/battery.sh -r "$HOME/battery.csv" >/dev/null 2>&1
+# 0 */6 * * * ~/dotfiles/utils/battery.sh -r "/Users/coder/battery.csv" >/dev/null 2>&1
 # Add above line in crontab by running $ "crontab -e"
 # check if it's active $ "crontab -l"
 
@@ -70,7 +70,6 @@ if [ "$1" = "-h" ] ;then
 	show_battery_help
 	exit 0
 elif [ "$1" = "-r" ] ;then
-	echo $2
 	if [ $# -ne 2 ] ;then
 		echo 'Missing inline CSV_PATH after ./battery.sh -r "~/battery.csv"'
 	else
