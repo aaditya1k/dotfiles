@@ -31,7 +31,7 @@ else
                     --group-id "$sg_id" \
                     --protocol tcp \
                     --port "$port" \
-                    --cidr "$ip/32" \
+                    --cidr "$old_ip/32" \
                     --output text \
                     --profile "$profile"
 
