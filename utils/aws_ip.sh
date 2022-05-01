@@ -9,24 +9,24 @@ source $HOME/.aws/aws_ip_groups
 ## AWS_SG_IDS[1]="<security-group-id of profile2>"
 
 ip=$(curl --silent https://checkip.amazonaws.com)
-old_ip=$(head -1 $HOME/.aws/aws_ips.txt)
+old_ip=$(tail -1 $HOME/.aws/aws_ips.txt)
 
 if [[ "$ip" == "$old_ip" ]] ;then
     echo "IP is same. All good."
 else
-    echo "Updating security groups. New IP: $ip"
+    echo "Updating security groups. New IP: $ip\n\n"
 
     profile_index=0
     for profile in ${AWS_PROFILES[@]}
     do
-        echo "Running profile: $profile"
+        echo "Running profile: $profile\n\n"
         for sg_id in $(echo "$AWS_SG_IDS[$profile_index]")
         do
             for port in ${AWS_PORTS[@]}
             do
-                echo "Updating group $sg_id, port $port"
+                echo "\nUpdating group $sg_id, port $port"
 
-                echo "Revoking old ip"
+                echo "Revoking old ip: sg:$sg_id, port:$port, ip:$old_ip/32, profile:$profile"
                 aws ec2 revoke-security-group-ingress \
                     --group-id "$sg_id" \
                     --protocol tcp \
@@ -35,7 +35,7 @@ else
                     --output text \
                     --profile "$profile"
 
-                echo "Adding new ip"
+                echo "Adding new ip sg:$sg_id, port: $port, ip:$ip/32, profile:$profile"
                 aws ec2 authorize-security-group-ingress \
                     --group-id "$sg_id" \
                     --protocol tcp \
@@ -45,7 +45,7 @@ else
                     --profile "$profile"
             done
         done
-        echo "\n\n"
+        echo "\n"
         profile_index=$(expr $profile_index + 1)
     done
     echo "$ip" >> $HOME/.aws/aws_ips.txt

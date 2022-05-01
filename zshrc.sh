@@ -30,6 +30,7 @@ export NODE_REPL_HISTORY=""     # Disable ~/.node_repl_history
 
 source ~/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/dotfiles/utils/battery.sh
+source ~/dotfiles/utils/aws.sh
 
 
 # Docker
