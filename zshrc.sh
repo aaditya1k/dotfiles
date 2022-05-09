@@ -29,7 +29,6 @@ PS1='%F{white}%3~%F{blue}${vcs_info_msg_0_}%F{green}$%{$reset_color%} '
 export NODE_REPL_HISTORY=""     # Disable ~/.node_repl_history
 
 source ~/dotfiles/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/dotfiles/utils/battery.sh
 source ~/dotfiles/utils/aws.sh
 
 
