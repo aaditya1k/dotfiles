@@ -33,11 +33,6 @@ for config in "${configs[@]}" ;do
     mv "$HOME/$config" "$HOME/$config.old"
 done
 
-
-echo "\nSetting up configs"
-echo "SET BATTERY_LOG_PATH manually in ${HOME}/.zshrc"
-
-printf "\nBATTERY_LOG_PATH=\"\"\n\n" > ~/.zshrc
 printf "source '$HOME/dotfiles/zshrc.sh'" >> ~/.zshrc
 
 printf "so $HOME/dotfiles/vimrc.vim" > ~/.vimrc

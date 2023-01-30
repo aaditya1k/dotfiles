@@ -35,8 +35,8 @@ source ~/dotfiles/utils/aws.sh
 # Docker
 alias dkps="docker ps --format=\"table{{.ID}} {{.Names}}\" | sort --key=2"
 alias dkkill="docker kill \$(docker ps -q)"
-alias dkup="docker-compose up -d"
-alias dkdown="docker-compose down"
+alias dkup="docker compose up -d"
+alias dkdown="docker compose down"
 dkexe() {
     docker_processes=$(docker ps --format="{{.ID}} {{.Names}}")
 
