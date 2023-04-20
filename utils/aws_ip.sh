@@ -14,7 +14,7 @@ ip=$(curl --silent https://checkip.amazonaws.com)
 old_ip=$(tail -1 ${AWS_IP_FILE})
 
 if [[ "$ip" == "$old_ip" ]] ;then
-    echo "IP is same. All good."
+    echo "IP is same ${old_ip}. All good."
 else
     echo "Updating security groups. New IP: $ip\n"
 
