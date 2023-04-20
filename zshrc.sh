@@ -9,7 +9,7 @@ setopt hist_verify              # show command with history expansion to user be
 setopt share_history            # share command history data
 
 export CLICOLOR=1               # By enabling this ls will also run as "ls -G"
-export LSCOLORS=ExFxBxDxCxegedabagacad
+# export LSCOLORS=ExFxBxDxCxegedabagacad
 
 
 # Simple ROMPT
@@ -22,7 +22,8 @@ zstyle ':vcs_info:git:*' formats '[%b]' # Format the vcs_info_msg_0_ variable
 setopt PROMPT_SUBST             # Set up the prompt (with git branch name)
 
 # %3~ : only last 3 working directory will come in prompt
-PS1='%F{white}%3~%F{blue}${vcs_info_msg_0_}%F{green}$%{$reset_color%} '
+# PS1='%F{white}%3~%F{blue}${vcs_info_msg_0_}%F{green}$%{$reset_color%} '
+PS1='%3~${vcs_info_msg_0_}$%{$reset_color%} '
 # End of PROMPT
 
 
