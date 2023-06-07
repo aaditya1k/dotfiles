@@ -39,11 +39,11 @@ printf "so $HOME/dotfiles/vimrc.vim" > ~/.vimrc
 printf "source-file $HOME/dotfiles/tmux.conf" > ~/.tmux.conf
 
 
-echo "\nInstalling brew packages"
-brew_packages=("bat" "tmux")
-for brew_package in "${brew_packages[@]}" ;do
-    echo "> brew installing $brew_package"
-    brew install $brew_package
-done
+# echo "\nInstalling brew packages"
+# brew_packages=("bat" "tmux")
+# for brew_package in "${brew_packages[@]}" ;do
+#     echo "> brew installing $brew_package"
+#     brew install $brew_package
+# done
 
 echo "\nSetup Finished. Have Fun.."

@@ -59,7 +59,7 @@ else
                 #    --profile "$profile"
             done
             delete_execute="${delete_execute} --profile ${profile}"
-            add_execute="${add_execute} --profile ${profile}"
+            add_execute="${add_execute} --profile ${profile} --output yaml"
 
             echo "Revoking old ip: sg:$sg_id, ip:$old_ip/32, profile:$profile"
             eval ${delete_execute}
