@@ -18,23 +18,29 @@ fi
 ip=$(curl --silent https://checkip.amazonaws.com)
 old_ip=$(tail -1 ${AWS_IP_FILE})
 
-if [[ "$ip" == "$old_ip" ]] ;then
+if [[ "$ip" == "" ]]; then
+    echo "Unable to fetch new ip"
+elif [[ "$ip" == "$old_ip" ]]; then
     echo "IP is same ${old_ip}. All good."
 else
-    echo "Updating security groups. New IP: $ip\n"
+    echo "Updating security groups"
+    echo "New ip: $ip"
+    echo "Old ip: $old_ip"
 
     profile_index=0
     for profile in ${AWS_PROFILES[@]}
     do
-        echo "\n\nRunning profile: $profile"
-        for sg_id in $(echo "$AWS_SG_IDS[$profile_index]")
+        echo "\n\n$(expr $profile_index + 1)/${#AWS_PROFILES[@]} Running profile: $profile"
+        security_group_index=1
+        security_groups=($(echo "$AWS_SG_IDS[$profile_index]"))
+        for sg_id in $security_groups
         do
             delete_execute="aws ec2 revoke-security-group-ingress \
---group-id ${sg_id} \
---ip-permissions "
+                --group-id ${sg_id} \
+                --ip-permissions "
             add_execute="aws ec2 authorize-security-group-ingress \
---group-id ${sg_id} \
---ip-permissions "
+                --group-id ${sg_id} \
+                --ip-permissions "
             for port in ${AWS_PORTS[@]}
             do
                 delete_execute="${delete_execute} IpProtocol=tcp,FromPort="${port}",ToPort="${port}",IpRanges=\"[{CidrIp="${old_ip}/32"}]\""
@@ -61,10 +67,12 @@ else
             delete_execute="${delete_execute} --profile ${profile}"
             add_execute="${add_execute} --profile ${profile} --output yaml"
 
-            echo "Revoking old ip: sg:$sg_id, ip:$old_ip/32, profile:$profile"
+            echo "Revoking old ip for sg:$sg_id | ${security_group_index}/${#security_groups[@]}"
             eval ${delete_execute}
-            echo "Adding new ip sg:$sg_id, ip:$ip/32, profile:$profile"
+
+            echo "Adding new ip for sg:$sg_id | ${security_group_index}/${#security_groups[@]}"
             eval ${add_execute}
+            security_group_index=$(expr $security_group_index + 1)
         done
         echo "\n"
         profile_index=$(expr $profile_index + 1)
