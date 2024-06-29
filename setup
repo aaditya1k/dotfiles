@@ -1,4 +1,12 @@
-echo "Make sure brew is installed."
+if [ -z "${SHELL##*zsh*}" ] ;then
+    echo "Default shell is zsh"
+else
+    echo "Default shell is not zsh"
+    echo "Exiting Setup. Bye.."
+    exit 0
+fi
+
+
 echo "Do you want to continue this setup? (y/n) "
 old_stty_cfg=$(stty -g)
 stty raw -echo
@@ -11,39 +19,25 @@ else
     exit 0
 fi
 
-
-if [ -z "${SHELL##*zsh*}" ] ;then
-    echo "Default shell is zsh"
-else
-    echo "Default shell is not zsh"
-    echo "Exiting Setup. Bye.."
-    exit 0
-fi
-
-
 echo "\nChecking git submodules"
 git submodule update --init --recursive
 
 
 echo "\nBacking up old configurations"
-echo "Ignoring i3.conf"
-configs=(".zshrc" ".tmux.conf" ".vimrc")
+configs=(".zshrc" ".vimrc")
 for config in "${configs[@]}" ;do
     echo "Renaming old config $HOME/$config -> $config.old"
     mv "$HOME/$config" "$HOME/$config.old"
 done
 
 printf "source '$HOME/dotfiles/zshrc.sh'" >> ~/.zshrc
+printf "so $HOME/dotfiles/configs/vimrc.vim" > ~/.vimrc
 
-printf "so $HOME/dotfiles/vimrc.vim" > ~/.vimrc
-printf "source-file $HOME/dotfiles/tmux.conf" > ~/.tmux.conf
-
-
-# echo "\nInstalling brew packages"
-# brew_packages=("bat" "tmux")
-# for brew_package in "${brew_packages[@]}" ;do
-#     echo "> brew installing $brew_package"
-#     brew install $brew_package
-# done
+echo "\nCopying Zed Configs"
+mkdir ~/.config
+mkdir ~/.config/zed
+echo "Removing current zed settings files"
+rm ~/.config/zed/settings.json
+ln -s ~/dotfiles/configs/zed_settings.json ~/.config/zed/settings.json
 
 echo "\nSetup Finished. Have Fun.."

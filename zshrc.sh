@@ -74,7 +74,6 @@ dkexe() {
 }
 
 # misc.
-alias audio-dl="youtube-dl $1 -x --audio-quality=0 $2"
 alias paste_json="pbpaste | json_pp"
 alias pretty_json="pbpaste | json_pp | bat -l json"
 
