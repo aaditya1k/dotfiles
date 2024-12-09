@@ -4,22 +4,31 @@
 // documentation: https://zed.dev/docs/configuring-zed
 //
 // To see all of Zed's default settings without changing your
-// custom settings, run the `open default settings` command
-// from the command palette or from `Zed` application menu.
+// custom settings, run the `zed: Open Default Settings` command
+// from the command palette
 {
-  "ui_font_size": 15,
+  "buffer_font_family": "Fira Code",
+  "ui_font_size": 16,
   "buffer_font_size": 13,
+  "theme": "Gruvbox Dark",
+  "base_keymap": "VSCode",
   "buffer_font_features": {
     "calt": false,
     "liga": false
   },
   "wrap_guides": [120],
-  "preferred_line_length": 120,
-  "soft_wrap": "none",
+  // "preferred_line_length": 120,
+  // "soft_wrap": "none",
   "cursor_blink": false,
+  "cursor_shape": "bar",
   "ensure_final_newline_on_save": false,
   "telemetry": {
     "diagnostics": false,
     "metrics": false
+  },
+  "format_on_save": "off",
+  "autosave": "off",
+  "features": {
+    "inline_completion_provider": "none"
   }
 }
