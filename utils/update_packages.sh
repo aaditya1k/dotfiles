@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 
 list_npm_packages() {
     echo "\n\n"
@@ -45,5 +45,9 @@ echo $(which python3) $(python3 --version)
 rustc --version
 go version
 php --version
+
+echo "\n==> Update composer(php) in new terminal window"
+update_composer_script=$(pwd)/update_composer.sh
+open -a "Terminal" $update_composer_script
 
 list_npm_packages
