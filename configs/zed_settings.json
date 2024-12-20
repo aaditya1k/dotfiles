@@ -13,13 +13,13 @@
   "theme": "Gruvbox Dark",
   "base_keymap": "VSCode",
   "buffer_font_features": {
-    "calt": false,
-    "liga": false
+    "calt": true,
+    "liga": true
   },
   "wrap_guides": [120],
   // "preferred_line_length": 120,
   // "soft_wrap": "none",
-  "cursor_blink": false,
+  "cursor_blink": true,
   "cursor_shape": "bar",
   "ensure_final_newline_on_save": false,
   "telemetry": {
