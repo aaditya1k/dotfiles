@@ -37,7 +37,17 @@ echo "\nCopying Zed Configs"
 mkdir ~/.config
 mkdir ~/.config/zed
 echo "Removing current zed settings files"
-rm ~/.config/zed/settings.json
-ln -s ~/dotfiles/configs/zed_settings.json ~/.config/zed/settings.json
+while True; do
+    read -p "Enter zed settings file path: " zed_settings_config
+    echo $zed_settings_config
+    if [[ -f $zed_settings_config ]]; then
 
+        echo "Copying zed settings file"
+        rm ~/.config/zed/settings.json
+        ln -s "$zed_settings_config" ~/.config/zed/settings.json
+        break
+    else
+        echo "File not found."
+    fi
+done
 echo "\nSetup Finished. Have Fun.."
