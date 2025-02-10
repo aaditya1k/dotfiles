@@ -1,14 +1,22 @@
 #!/bin/zsh
-source $HOME/.aws/aws_ip_groups
 
-# ADD these VARS in $HOME/.aws/aws_ip_groups
-## AWS_DESCRIPTION="Aaditya"
-## AWS_IP_FILE="<absolute path of ips file>"
-## AWS_PROFILES=(profile0 profile1 profile2)
-## AWS_PORTS=(22 21)
-## declare -A AWS_SG_IDS
-## AWS_SG_IDS[0]="<security-group-id of profile0> <security-group-id of profile0>"
-## AWS_SG_IDS[0]="<security-group-id of profile1>"
+# -- Add these vars in $HOME/.aws/aws_ip_config
+# AWS_IP_FOLDER="/configs/aws"
+#
+# -- Add these vars in config: /configs/aws/aws_ip_groups
+# AWS_DESCRIPTION="Aaditya_auto"
+# AWS_PROFILES=(profile0 profile1 profile2)
+# AWS_PORTS=(22 21)
+# declare -A AWS_SG_IDS
+# AWS_SG_IDS[0]="<security-group-id of profile0> <security-group-id of profile0>"
+# AWS_SG_IDS[0]="<security-group-id of profile1>"
+#
+# -- Create empty /configs/aws/aws_ips
+
+source $HOME/.aws/aws_ip_config
+
+source $AWS_IP_FOLDER/aws_ip_groups
+AWS_IP_FILE=$AWS_IP_FOLDER/aws_ips
 
 if [ ! -f "$AWS_IP_FILE" ]; then
     echo "${AWS_IP_FILE} doesn't exists."

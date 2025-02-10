@@ -1,5 +1,8 @@
 #!/bin/zsh
-source $HOME/.aws/aws_ip_groups
+source $HOME/.aws/aws_ip_config
+
+source $AWS_IP_FOLDER/aws_ip_groups
+AWS_IP_FILE=$AWS_IP_FOLDER/aws_ips
 
 if [ -z $1 ]; then
     echo "Missing IP.\nExample:"
