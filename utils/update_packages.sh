@@ -34,6 +34,7 @@ npm install -g npm
 echo "NPM version:" $(npm --version)
 echo "Node version:" $(node --version)
 npm list -g
+npm update -g
 echo "Yarn global packages:"
 yarn global list
 
